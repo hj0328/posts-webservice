@@ -24,6 +24,12 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // compile 시점에만 필요한 의존성.
+    // jar에 포함되지 않아 불필요한 크기 증가 방지
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    // 컴파일 타임에 애노테이션을 처리하고 코드를 생성하거나 수정
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
 }
 
 test {
