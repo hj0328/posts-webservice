@@ -22,3 +22,5 @@
 .gradle
 **/build/
 !src/**/build/
+
+application-oauth.properties
