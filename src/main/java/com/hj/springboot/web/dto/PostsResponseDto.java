@@ -1,7 +1,6 @@
 package com.hj.springboot.web.dto;
 
 import com.hj.springboot.web.domain.posts.Posts;
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter
