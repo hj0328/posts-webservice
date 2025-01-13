@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -22,6 +23,7 @@ public class HelloControllerTest {
     private MockMvc mvc;
 
     @Test
+    @WithMockUser(roles = "USER")
     void hello_리턴() throws Exception {
         String hello = "hello";
         mvc.perform(get("/hello"))
@@ -48,6 +50,7 @@ public class HelloControllerTest {
         jsonPath 응답 값을 필드별로 검증가능
      */
     @Test
+    @WithMockUser(roles = "USER")
     void helloDto_리턴() throws Exception {
         String name = "hello";
         int amount = 1000;
