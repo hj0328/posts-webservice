@@ -49,9 +49,5 @@ test {
 
 // bootJar를 실행형 JAR로 사용
 tasks.named('jar') {
-    enabled = false // jar 태스크 비활성화
-}
-
-bootJar {
-    enabled = true // 실행형 JAR 생성
+    enabled = false
 }
