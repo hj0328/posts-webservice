@@ -41,13 +41,18 @@ dependencies {
     implementation 'org.springframework.session:spring-session-jdbc'
 
     testImplementation 'org.springframework.security:spring-security-test'
+
+    implementation "org.mariadb.jdbc:mariadb-java-client"
 }
 
 test {
     useJUnitPlatform()
 }
 
-// bootJar를 실행형 JAR로 사용
 tasks.named('jar') {
-    enabled = false
+    enabled = false // 기본 JAR 비활성화
+}
+
+bootJar {
+    enabled = true // 실행형 JAR 활성화
 }
