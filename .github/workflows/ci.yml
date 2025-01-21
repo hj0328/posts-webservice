@@ -26,8 +26,6 @@ jobs:
       - name: Build with Gradle Wrapper
         run: ./gradlew build
 
-      # zip 파일 생성
-
       # AWS 자격 증명 설정
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
@@ -36,7 +34,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2
 
-      # 배포 전 작업
+      # 배포 전 작업, zip 파일로 압축
       - name: Prepare files for deployment
         run: |
           echo "Zipping files..."
@@ -53,3 +51,15 @@ jobs:
             --region ap-northeast-2 \
             --acl private
           echo "Upload to S3 completed."
+
+      # 6. AWS CodeDeploy로 배포
+      - name: Deploy to CodeDeploy
+        run: |
+          echo "Deploying to CodeDeploy..."
+          aws deploy create-deployment \
+            --application-name freelec-springboot3-webservice \
+            --deployment-config-name CodeDeployDefault.OneAtATime \
+            --deployment-group-name freelec-springboot3-webservice-group  \
+            --s3-location bucket=freelec-springboot-build-zip,bundleType=zip,key=posts-webservice.zip \
+            --region ap-northeast-2
+          echo "Deployment started."
