@@ -38,9 +38,13 @@ jobs:
       - name: Prepare files for deployment
         run: |
           echo "Zipping files..."
-          zip -r posts-webservice *
-          mkdir -p deploy
-          mv posts-webservice.zip deploy/posts-webservice.zip
+          mkdir -p before-deploy
+          cp scripts/*.sh before-deploy/
+          cp appspec.yml before-deploy/
+          cp build/libs/*.jar before-deploy/
+          cd before-deploy && zip -r before-deploy *
+          cd ../ && mkdir -p deploy
+          mv before-deploy/before-deploy.zip deploy/posts-webservice.zip
           echo "Files prepared in 'deploy/posts-webservice.zip'"
 
       # AWS S3로 업로드
