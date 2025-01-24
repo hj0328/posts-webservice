@@ -25,7 +25,8 @@ public class SecurityConfig {
                 .headers(headers -> headers
                         .frameOptions().disable())  // h2 console 사용하기 위해 차단안함. 실무에서는 보안을 위해 차단필요
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()
+                        .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile")
+                            .permitAll()
                         .requestMatchers("/api/v1/**").hasRole(Role.USER.name())    // USER 권한 가능
                         .anyRequest().authenticated())
                 .logout(logout -> logout
