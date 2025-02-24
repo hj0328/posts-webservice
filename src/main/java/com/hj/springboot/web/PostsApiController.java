@@ -7,6 +7,8 @@ import com.hj.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 public class PostsApiController {
@@ -25,6 +27,16 @@ public class PostsApiController {
     @GetMapping("/api/v1/posts/{id}")
     public PostsResponseDto findById(@PathVariable Long id) {
         return postsService.findById(id);
+    }
+
+    @GetMapping("/api/v1/posts/title/{title}")
+    public List<PostsResponseDto> findByTitle(@PathVariable String title) {
+        return postsService.findByTitle(title);
+    }
+
+    @GetMapping("/api/v1/posts/author/{author}")
+    public List<PostsResponseDto> findByAuthor(@PathVariable String author) {
+        return postsService.findByAuthor(author);
     }
 
     @DeleteMapping("/api/v1/posts/{id}")

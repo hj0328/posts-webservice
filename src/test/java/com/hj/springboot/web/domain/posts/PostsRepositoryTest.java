@@ -1,5 +1,6 @@
 package com.hj.springboot.web.domain.posts;
 
+import com.hj.springboot.web.dto.PostsResponseDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -66,5 +67,46 @@ class PostsRepositoryTest {
                 .isAfter(now);
         assertThat(posts.getModifiedDate())
                 .isAfter(now);
+    }
+
+    @Test
+    void 게시글_제목으로_조회() throws Exception {
+        // given
+        String title = "게시글 title";
+        String content = "테스트 content";
+
+        postsRepository.save(Posts.builder()
+                .title(title)
+                .content(content)
+                .author("hj")
+                .build());
+
+        // when
+        List<PostsResponseDto> list = postsRepository.findByTitle(1, title);
+
+        // then
+        PostsResponseDto postDto = list.get(0);
+        assertThat(postDto.getTitle()).isEqualTo(title);
+    }
+
+    @Test
+    void 게시글_작성자로_조회() throws Exception {
+        // given
+        String title = "게시글 title";
+        String content = "테스트 content";
+        String author = "테스트 hj";
+
+        postsRepository.save(Posts.builder()
+                .title(title)
+                .content(content)
+                .author(author)
+                .build());
+
+        // when
+        List<PostsResponseDto> list = postsRepository.findByAuthor(1, title);
+
+        // then
+        PostsResponseDto postDto = list.get(0);
+        assertThat(postDto.getTitle()).isEqualTo(title);
     }
 }
