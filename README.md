@@ -14,4 +14,6 @@
 🚧 프로젝트 아키텍처  
 <img width="792" alt="Image" src="https://github.com/user-attachments/assets/890fcda0-3cb5-4436-a293-5b93b7640757" />
 
+<!-- 
 📈 기술적 고민 및 트러블슈팅
+-->
